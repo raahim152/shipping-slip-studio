@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping Slip Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <h1>Shipping Slip Studio</h1>
+          <p>Simple, clean shipping labels</p>
+        </div>
+      </div>
+      <div class="topbar-tag">PKR · Pakistan</div>
+    </header>
+
+    <main class="workspace">
+
+      <section class="editor-panel">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">NEW SHIPMENT</span>
+            <h2>Customer details</h2>
+            <p>Enter the delivery information below.</p>
+          </div>
+        </div>
+
+        <form id="shippingForm">
+          <div class="field">
+            <label for="customerName">Customer name</label>
+            <input id="customerName" type="text"
+              placeholder="e.g. Ali Khan" required>
+          </div>
+
+          <div class="field">
+            <label for="customerAddress">Delivery address</label>
+            <textarea id="customerAddress" rows="3"
+              placeholder="House number, street, area, city..."
+              required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="postalCode">Postal code <span class="optional">Optional</span></label>
+            <input id="postalCode" type="text"
+              placeholder="e.g. 54000">
+          </div>
+
+          <div class="field">
+            <label for="customerPhone">Phone number</label>
+            <input id="customerPhone" type="tel"
+              placeholder="e.g. 0300 1234567" required>
+          </div>
+
+          <div class="field">
+            <label>Payment method</label>
+            <div class="payment-options">
+              <label class="payment-option">
+                <input type="radio" name="paymentStatus" value="PAID" checked>
+                <span class="payment-card">
+                  <span class="payment-icon">✓</span>
+                  <span>
+                    <strong>PAID</strong>
+                    <small>Already paid</small>
+                  </span>
+                </span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentStatus" value="COD">
+                <span class="payment-card">
+                  <span class="payment-icon">₨</span>
+                  <span>
+                    <strong>Cash on delivery</strong>
+                    <small>Collect payment</small>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field" id="codAmountField" hidden>
+            <label for="codAmount">COD amount (PKR)</label>
+            <input id="codAmount" type="number"
+              min="0" step="1" placeholder="e.g. 2500">
+          </div>
+
+          <button class="primary-button full-button" type="submit">
+            <span>＋</span> Add slip to queue
+          </button>
+        </form>
+      </section>
+
+      <section class="preview-panel">
+        <div class="section-heading preview-heading">
+          <div>
+            <span class="eyebrow">LIVE PREVIEW</span>
+            <h2>Shipping label</h2>
+            <p>This is how your printed label will look.</p>
+          </div>
+          <span class="preview-indicator">
+            <span></span> Preview
+          </span>
+        </div>
+
+        <div class="preview-stage">
+          <div id="labelPreview" class="shipping-label preview-label">
+            <div class="label-to">TO</div>
+            <div class="label-name">Customer name</div>
+            <div class="label-address">Delivery address will appear here</div>
+            <div class="label-postal" hidden></div>
+            <div class="label-phone">Phone number</div>
+            <div class="label-payment paid">PAID</div>
+          </div>
+        </div>
+
+        <div class="preview-actions">
+          <button type="button" id="printPreviewButton"
+            class="secondary-button">
+            Print this slip
+          </button>
+        </div>
+
+        <div class="queue-panel">
+          <div class="queue-heading">
+            <div>
+              <span class="eyebrow">BATCH PRINTING</span>
+              <h3>Print queue</h3>
+            </div>
+            <span id="queueCount" class="queue-count">0 slips</span>
+          </div>
+
+          <div id="queueEmpty" class="queue-empty">
+            <div class="empty-icon">▤</div>
+            <strong>Your queue is empty</strong>
+            <p>Add customer slips to prepare a batch PDF.</p>
+          </div>
+
+          <div id="queueList" class="queue-list"></div>
+
+          <div class="print-settings">
+            <div class="field">
+              <label for="pageOrientation">A4 page orientation</label>
+              <select id="pageOrientation">
+                <option value="landscape">Landscape</option>
+                <option value="portrait">Portrait</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="queue-actions">
+            <button type="button" id="printQueueButton"
+              class="primary-button" disabled>
+              Print all slips
+            </button>
+            <button type="button" id="clearQueueButton"
+              class="text-button" disabled>
+              Clear queue
+            </button>
+          </div>
+
+          <p class="print-note">
+            Choose “Save as PDF” in your browser's print window to save your slips as a PDF.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      Shipping Slip Studio <span>·</span> Made for your business
+    </footer>
+  </div>
+
+  <div id="printArea" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
